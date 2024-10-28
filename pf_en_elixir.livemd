@@ -1,0 +1,189 @@
+# Introducción a la Programación Funcional con Elixir
+
+## Un poco de sintaxis para poder hablar Elixir
+
+* Elixir es lenguaje con mucho azucar sintáctico (syntaxis diseñada para hacer las cosas más _dulces_ tanto para escribir como para leer, con el **coste de que el lenguaje es menos uniforme y consistente**)
+  > **_Sintactic sugar causes cancer of semicolon_** (Alan J. Perlis)
+* No voy a usar azucar sintáctico en este taller (aunque a veces no podremos escapar de ello porque Elixir va a responder _azucarando_ algunos resultados).
+
+<!-- livebook:{"break_markdown":true} -->
+
+### Tipos básicos
+
+* Los tipos básicos son *integer* (_big integers_), *float*, *binary* (_array de bytes_, usado para representar strings) y *atoms*.
+
+* **¿Qué es un átomo?** Constante que empieza por `:' y que sólo se representa a si mismo.
+
+  #### Números
+
+```elixir
+# Primo más pequeño que no cabe en 64 bits
+18_446_744_073_709_551_615
+
+```
+
+```elixir
+  # Pi
+  3.141592653589793
+```
+
+#### Binary (String)
+
+```elixir
+  # Los strings
+  "Don't panic"
+```
+
+```elixir
+  # Un paquete IP
+  <<69,0,0,60,28,70,64,0,64,6,177,230,192,168,0,1,192,168,0,199,222,173,190,239,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0>>
+```
+
+```elixir
+  # Mi nombre, con acento, en UTF 8
+  <<195,129,110,103,101,108>>
+```
+
+#### Átomos
+
+* Constantes, se usan masivamente
+* Convención: *:snake_case*
+
+```elixir
+  :ok
+```
+
+```elixir
+  :error
+```
+
+```elixir
+  :not_found
+```
+
+#### Tres átomos especiales
+
+```elixir
+  :true
+```
+
+```elixir
+  :false
+```
+
+```elixir
+  :nil
+```
+
+#### Operador de igualdad (==)
+
+```elixir
+  :ok == :error
+```
+
+```elixir
+  :ok == :ok
+```
+
+## Alan Turing vs Alonzo Church
+
+* En la década de 1930 se fijan dos modelos computaciones **equivalentes**: La máquina de Turing y el $\lambda$-Calculo de Church.
+* Los lenguajes imperativos (C, Java, Python, JS, etc.), en esencia, siguen el modelo de computación de las máquinas de Turing:
+  > Hay una serie de almacenes (variables mutables) de datos (el estado) y nuestros programas modifican esos almacenes, paso a paso, y el resultado de la computación queda en uno de esos almacenes.
+
+```python
+  n = 3
+  suma = 0
+  while n > 0:
+    suma += n
+    n -= 1
+```
+
+* En Python podemos seguir la ejecución paso a paso y entendemos cómo se modifican las variables hasta que el programa termina
+
+| Estado            | Paso           | Nuevo estado      |
+| ----------------- | -------------- | ----------------- |
+| `n = ?, suma = ?` | `n = 3`        | `n = 3, suma = ?` |
+| `n = 3, suma = ?` | `suma = 0`     | `n = 3, suma = 0` |
+| `n = 3, suma = 0` | `while n > 0:` | `n = 3, suma = 0` |
+| `n = 3, suma = 0` | `suma += n`    | `n = 3, suma = 3` |
+| `n = 3, suma = 3` | `n -= 1`       | `n = 2, suma = 3` |
+| `n = 2, suma = 3` | `while n > 0:` | `n = 2, suma = 3` |
+| `n = 2, suma = 3` | `suma += n`    | `n = 2, suma = 5` |
+| `n = 2, suma = 5` | `n -= 1`       | `n = 1, suma = 5` |
+| `n = 1, suma = 5` | `while n > 0:` | `n = 1, suma = 5` |
+| `n = 1, suma = 5` | `suma += n`    | `n = 1, suma = 6` |
+| `n = 1, suma = 6` | `n -= 1`       | `n = 0, suma = 6` |
+| `n = 0, suma = 6` | `while n > 0:` | `n = 0, suma = 6` |
+
+<!-- livebook:{"break_markdown":true} -->
+
+* Los lenguajes funcionales, en esencia, siguen el modelo de computación del $\lambda$-Cálculo:
+  > Un programa es un conjunto de funciones matemáticas y el resultado es lo que devuelve una función para ciertos datos. El modelo de computación es la reducción de expresiones: en cada paso de reducción se substituye una expresión (redex) por su definición
+* Veamos un ejemplo en Elixir de un programa con varias funciones: `(==)`, `(+)`, `(-)`, `if-then-else`, y `suma`.
+* La más importante para nosotros es `suma`:
+
+```elixir
+defmodule Suma do
+  def suma(n) do
+    if n == 1 do 1 else n + suma(n-1) end
+  end
+end
+```
+
+```elixir
+  Suma.suma(3)
+```
+
+#### Reducción de expresiones
+
+`Suma.suma(3)`
+
+$\rightarrow$ `if ` <ins>`3 == 1`</ins> ` do 1 else 3 + suma(3 - 1) end`
+
+$\rightarrow$ <ins>`if false do 1 else 3 + suma(3 - 1) end`</ins>
+
+$\rightarrow$ `3 + suma(`<ins>`3 - 1`</ins>`)`
+
+$\rightarrow$ `3 + `<ins>`suma(2)`</ins>`
+
+$\rightarrow$ `3 + if `<ins>`2 == 1`</ins>`do 1 else 2 + suma(2 - 1) end`
+
+$\rightarrow$ `3 + `<ins>`if false do 1 else 2 + suma(2 - 1) end`</ins>`
+
+$\rightarrow$ `3 + (2 + suma(`<ins>`2 - 1`</ins>`))
+
+$\rightarrow$ `3 + (2 + `<ins>`suma(1)`</ins>`)`
+
+$\rightarrow$ `3 + (2 + if `<ins>`1 == 1`</ins>`do 1 else 1 + suma(1 - 0) end)`
+
+$\rightarrow$ `3 + (2 + `<ins>`if true do 1 else 1 + suma(1 - 0) end`</ins>`)`
+
+$\rightarrow$ `3 + (`<ins>`2 + 1`</ins>`)`
+
+$\rightarrow$ <ins>`3 + 3`</ins>
+
+$\rightarrow$ `6`
+
+## Recursión
+
+* La recursión es uno de los elementos básicos de la programación funcional.
+* También, por experiencia, sabemos que es uno de los puntos más complejos de aprender.
+* Sin embargo es mucho más sencillo de lo que parece:
+  > Para definir una función recursiva basta con pensar que la función ya está hecha y ahora buscas los casos básicos en los que puedes definir la función. Ej. asumimos que `suma` ya funciona, entonces pensamos en un casos básico ($n = 1$, $resultado = 1$) y un caso no básico ($n > 1$): ¿puedo devolver el resultado suponiendo que `suma` ya funciona? Sí: $n + suma(n-1)$.
+
+## Estructuras de datos
+
+### Tuplas
+
+* _Producto cartesiano_
+* Sintaxis con llaves
+* Memoria contigua, no se suele hacer que crezcan o decrezcan
+
+```elixir
+{:ok, "<!DOCTYPE html><html>...</html>"}
+```
+
+```elixir
+{:error, 404}
+```
