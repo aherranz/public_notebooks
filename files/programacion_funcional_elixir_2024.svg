@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="148mm"
+   viewBox="0 0 210 148"
+   version="1.1"
+   id="svg224"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="programacion_funcional_elixir_2024.svg"
+   inkscape:export-filename="programacion_funcional_elixir_2024.pdf"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview226"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.1893044"
+     inkscape:cx="428.40168"
+     inkscape:cy="373.74788"
+     inkscape:window-width="1920"
+     inkscape:window-height="1123"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs221">
+    <linearGradient
+       id="elixir-original-a"
+       gradientUnits="userSpaceOnUse"
+       x1="835.59198"
+       y1="-36.546001"
+       x2="821.211"
+       y2="553.414"
+       gradientTransform="matrix(0.04210331,0,0,0.06492416,26.192157,93.401542)">
+      <stop
+         offset="0"
+         stop-color="#d9d8dc"
+         id="stop2" />
+      <stop
+         offset="1"
+         stop-color="#fff"
+         stop-opacity=".385"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
+       id="elixir-original-b"
+       gradientUnits="userSpaceOnUse"
+       x1="942.35699"
+       y1="-40.592999"
+       x2="824.69202"
+       y2="472.24301"
+       gradientTransform="matrix(0.03707169,0,0,0.07372137,25.860067,93.411604)">
+      <stop
+         offset="0"
+         stop-color="#8d67af"
+         stop-opacity=".672"
+         id="stop9" />
+      <stop
+         offset="1"
+         stop-color="#9f8daf"
+         id="stop11" />
+    </linearGradient>
+    <linearGradient
+       id="elixir-original-c"
+       gradientUnits="userSpaceOnUse"
+       x1="924.646"
+       y1="120.513"
+       x2="924.646"
+       y2="505.85101"
+       gradientTransform="matrix(0.03983096,0,0,0.06865729,26.041847,93.404139)">
+      <stop
+         offset="0"
+         stop-color="#26053d"
+         stop-opacity=".762"
+         id="stop16" />
+      <stop
+         offset="1"
+         stop-color="#b7b4b4"
+         stop-opacity=".278"
+         id="stop18" />
+    </linearGradient>
+    <linearGradient
+       id="elixir-original-d"
+       gradientUnits="userSpaceOnUse"
+       x1="428.034"
+       y1="198.448"
+       x2="607.32501"
+       y2="559.255"
+       gradientTransform="matrix(0.05998992,0,0,0.04557676,27.372467,93.382064)">
+      <stop
+         offset="0"
+         stop-color="#91739f"
+         stop-opacity=".46"
+         id="stop23" />
+      <stop
+         offset="1"
+         stop-color="#32054f"
+         stop-opacity=".54"
+         id="stop25" />
+    </linearGradient>
+    <linearGradient
+       id="elixir-original-e"
+       gradientUnits="userSpaceOnUse"
+       x1="907.89502"
+       y1="540.63599"
+       x2="590.242"
+       y2="201.28101"
+       gradientTransform="matrix(0.04603123,0,0,0.05937314,26.451847,93.395699)">
+      <stop
+         offset="0"
+         stop-color="#463d49"
+         stop-opacity=".331"
+         id="stop30" />
+      <stop
+         offset="1"
+         stop-color="#340a50"
+         stop-opacity=".821"
+         id="stop32" />
+    </linearGradient>
+    <linearGradient
+       id="elixir-original-f"
+       gradientUnits="userSpaceOnUse"
+       x1="1102.297"
+       y1="100.542"
+       x2="1008.071"
+       y2="431.64801"
+       gradientTransform="matrix(0.03440979,0,0,0.07946717,25.684117,93.415825)">
+      <stop
+         offset="0"
+         stop-color="#715383"
+         stop-opacity=".145"
+         id="stop37" />
+      <stop
+         offset="1"
+         stop-color="#f4f4f4"
+         stop-opacity=".234"
+         id="stop39" />
+    </linearGradient>
+    <linearGradient
+       id="elixir-original-g"
+       gradientUnits="userSpaceOnUse"
+       x1="1354.6639"
+       y1="140.06"
+       x2="1059.233"
+       y2="84.466003"
+       gradientTransform="matrix(0.02977746,0,0,0.09180276,25.378657,93.42816)">
+      <stop
+         offset="0"
+         stop-color="#a5a1a8"
+         stop-opacity=".356"
+         id="stop44" />
+      <stop
+         offset="1"
+         stop-color="#370c50"
+         stop-opacity=".582"
+         id="stop46" />
+    </linearGradient>
+  </defs>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       fill-rule="evenodd"
+       clip-rule="evenodd"
+       fill="url(#elixir-original-a)"
+       d="m 62.040007,87.981018 c -8.99199,4.349917 -20.28879,26.911052 -10.87479,36.811982 8.69984,10.8748 27.72261,0.422 22.20406,-13.14713 -6.97935,-11.686345 -11.36173,-12.303125 -11.32927,-23.664852 z"
+       id="path7"
+       style="fill:url(#elixir-original-a);stroke-width:0.32462" />
+    <path
+       fill-rule="evenodd"
+       clip-rule="evenodd"
+       fill="url(#elixir-original-b)"
+       d="m 62.040007,87.883632 c -8.95953,4.349917 -20.28879,26.846128 -10.84233,36.779528 3.47344,4.02528 9.08937,5.35625 12.2382,2.95405 8.56999,-6.10288 2.40219,-17.23737 3.37606,-25.48273 -3.57084,-3.311125 -4.83684,-10.647558 -4.77193,-14.250848 z"
+       id="path14"
+       style="fill:url(#elixir-original-b);stroke-width:0.32462" />
+    <path
+       fill-rule="evenodd"
+       clip-rule="evenodd"
+       fill="url(#elixir-original-c)"
+       d="m 59.540417,89.214576 c -7.23904,5.16147 -9.1543,24.346554 -7.82335,30.579274 2.66189,15.61426 24.41148,9.18677 22.5936,-5.35624 -1.94773,-9.47894 -15.84148,-12.72514 -14.77025,-25.223034 z"
+       id="path21"
+       style="fill:url(#elixir-original-c);stroke-width:0.32462" />
+    <path
+       fill-rule="evenodd"
+       clip-rule="evenodd"
+       fill="url(#elixir-original-d)"
+       d="m 66.714547,103.98481 c 3.37606,4.34992 4.12268,7.33644 2.20742,9.05693 -8.992,6.29763 -19.89925,2.40218 -17.52951,-12.10836 -3.08391,7.33643 -8.79724,18.30861 3.79806,19.86679 6.75211,1.16863 17.52953,0.64924 19.12015,-5.22639 -0.0649,-5.16148 -3.50591,-7.43382 -7.59612,-11.58897 z"
+       id="path28"
+       style="fill:url(#elixir-original-d);stroke-width:0.32462" />
+    <path
+       fill-rule="evenodd"
+       clip-rule="evenodd"
+       fill="url(#elixir-original-e)"
+       d="m 53.502477,99.634905 c -0.94139,6.881945 11.3942,25.287945 18.92539,23.048065 -5.74578,11.55649 -18.47091,-6.88195 -20.77572,-13.53669 0.48692,-3.57082 0.71416,-5.32378 1.85033,-9.511375 z"
+       id="path35"
+       style="fill:url(#elixir-original-e);stroke-width:0.32462" />
+    <path
+       fill-rule="evenodd"
+       clip-rule="evenodd"
+       fill="url(#elixir-original-f)"
+       d="m 60.741527,103.95235 c 0.2597,2.5645 1.26602,6.65473 0,9.34907 -1.26602,2.69437 -7.04428,7.62859 -5.45363,11.94605 3.70068,8.0506 12.04343,-1.42833 11.97851,-6.16779 0.35708,-3.83053 -2.1425,-12.56283 -0.58432,-17.04259 l -0.71417,-0.90893 -4.41484,-1.298485 c -0.71416,1.038785 -0.97386,2.434645 -0.81155,4.122675 z"
+       id="path42"
+       style="fill:url(#elixir-original-f);stroke-width:0.32462" />
+    <path
+       fill-rule="evenodd"
+       clip-rule="evenodd"
+       fill="url(#elixir-original-g)"
+       d="m 62.332167,91.324611 c -9.51139,5.388704 -5.61593,13.828839 -5.19393,22.983139 l 6.20026,-17.983975 c -0.45448,-1.850342 -0.74663,-3.0839 -1.00633,-4.999164 z"
+       id="path49"
+       style="fill:url(#elixir-original-g);stroke-width:0.32462" />
+    <path
+       fill-rule="evenodd"
+       clip-rule="evenodd"
+       fill="#330a4c"
+       fill-opacity="0.316"
+       d="m 63.306037,96.291305 c -4.80438,3.798075 -4.57717,10.160625 -6.03795,17.529515 2.62942,-6.91442 1.33094,-12.40051 6.03795,-17.529515 z"
+       id="path51"
+       style="stroke-width:0.32462" />
+    <path
+       fill-rule="evenodd"
+       clip-rule="evenodd"
+       fill="#ffffff"
+       d="m 56.002057,126.67581 c 2.59697,0.35708 3.92791,0.71416 4.05778,0.97387 0.0974,1.3634 -3.60331,0.38953 -4.05778,-0.97387 z"
+       id="path53"
+       style="stroke-width:0.32462" />
+    <path
+       fill-rule="evenodd"
+       clip-rule="evenodd"
+       fill="#ededed"
+       fill-opacity="0.603"
+       d="m 57.300557,91.324611 c -2.2399,2.499581 -4.67455,7.076734 -5.9081,9.641239 -0.32463,2.11002 -0.16231,5.09654 0.19476,7.62857 0.29217,-5.90808 2.43466,-12.725115 5.71334,-17.269809 z"
+       id="path55"
+       style="stroke-width:0.32462" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:12.7px;line-height:125%;font-family:Muli;-inkscape-font-specification:'Muli Semi-Bold';letter-spacing:0px;word-spacing:0px;fill:#800080;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="24.039686"
+       y="22.186934"
+       id="text468"
+       inkscape:label="text468"><tspan
+         sodipodi:role="line"
+         id="tspan466"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;font-family:Muli;-inkscape-font-specification:'Muli Bold';fill:#800080;stroke-width:0.264583px"
+         x="24.039686"
+         y="22.186934">Taller de</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;font-family:Muli;-inkscape-font-specification:Muli;fill:#800080;stroke-width:0.264583px"
+         x="24.039686"
+         y="38.061932"
+         id="tspan351">Programación</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;font-family:Muli;-inkscape-font-specification:'Muli Bold';fill:#800080;stroke-width:0.264583px"
+         x="24.039686"
+         y="53.936932"
+         id="tspan470">Funcional</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;font-family:Muli;-inkscape-font-specification:Muli;fill:#800080;stroke-width:0.264583px"
+         x="24.039686"
+         y="69.811935"
+         id="tspan472">con Elixir</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:12.7px;line-height:125%;font-family:Muli;-inkscape-font-specification:'Muli Semi-Bold';letter-spacing:0px;word-spacing:0px;fill:#800080;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="113.42461"
+       y="135.09723"
+       id="text468-35"
+       inkscape:label="text468"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;font-family:Muli;-inkscape-font-specification:'Muli Bold';fill:#800080;stroke-width:0.264583px"
+         x="113.42461"
+         y="135.09723"
+         id="tspan472-1">Elixir Madrid</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:12.7px;line-height:125%;font-family:Muli;-inkscape-font-specification:'Muli Semi-Bold';letter-spacing:0px;word-spacing:0px;fill:#800080;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="60.411865"
+       y="22.471773"
+       id="text468-3"
+       inkscape:label="text468"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:12.7px;font-family:Muli;-inkscape-font-specification:'Muli Semi-Bold';fill:#800080;stroke-width:0.264583px"
+         x="60.411865"
+         y="22.471773"
+         id="tspan472-5" /></text>
+    <path
+       fill="#9c4e97"
+       d="m 163.04199,51.110455 c -0.31484,3.033943 -1.51697,4.522293 -3.63501,4.522293 -3.14843,0 -4.57953,-3.549141 -5.83891,-9.4453 l -2.03217,-9.073204 c -1.43111,-6.468596 -2.49013,-10.704668 -3.17705,-12.736838 -1.288,-3.949851 -3.20568,-5.638555 -5.32372,-5.638555 -3.40602,0 -5.58131,3.949851 -5.69579,9.273563 h 1.0304 c 0.25759,-4.121583 2.54736,-5.094735 4.20744,-5.094735 2.31839,0 4.35056,2.490123 5.75304,10.046359 l -12.25026,26.389586 h 5.40958 l 8.52939,-19.348547 2.4615,11.105378 c 0.91591,3.949853 1.88906,6.382731 2.9767,7.298633 1.11626,0.91591 2.26114,1.34524 3.46327,1.34524 2.06079,0 5.15199,-1.373857 5.15199,-8.643873 z"
+       id="path564"
+       style="stroke-width:0.0715551" />
+  </g>
+</svg>
