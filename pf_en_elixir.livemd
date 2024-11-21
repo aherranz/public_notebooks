@@ -1,4 +1,22 @@
+<!-- livebook:{"file_entries":[{"name":"programacion_funcional_elixir_2024-2.svg","type":"attachment"},{"name":"programacion_funcional_elixir_2024.svg","type":"attachment"}]} -->
+
 # Introducción a la Programación Funcional con Elixir
+
+```elixir
+Mix.install([{:hidden_cell, github: "BrooklinJazz/hidden_cell"}])
+```
+
+## Bienvenidos
+
+![](files/programacion_funcional_elixir_2024.svg)
+
+<!-- livebook:{"break_markdown":true} -->
+
+¿Alguna vez te has preguntado cómo la programación funcional puede transformar la forma en que abordas el desarrollo de software? Este taller es una invitación abierta para programadores de todos los lenguajes, ya seas novato en el mundo de la programación funcional o tengas experiencia en otros paradigmas.
+
+Como vehículo de aprendizaje vas a usar el lenguaje de programación [Elixir](https://elixir-lang.org/), un lenguaje funcional moderno y lleno de nuevas ideas, abordaremos los principios de la programación funcional sin la complejidad que suele asociarse a esta: inmutabilidad, recursividad, pattern matching y funciones de orden superior.
+
+La web en la que estás es un [Livebook](https://livebook.dev/), una *killer application* de Elixir que te va a permitir **no solo ejecutar código Elixir** si no **también modificarlo** y **reejecutarlo** para poder hacer tus propias exploraciones y pruebas. Como referencia, es una aplicación similar a Jupyter, es un entorno de desarrollo interactivo que permite compartir conocimiento, desplegar aplicaciones, visualizar datos, ejecutar modelos de aprendizaje, depurar, etc.
 
 ## Un poco de sintaxis para poder hablar Elixir
 
@@ -10,38 +28,40 @@
 
 ### Tipos básicos
 
-* Los tipos básicos son *integer* (_big integers_), *float*, *binary* (_array de bytes_, usado para representar strings) y *atoms*.
+* Los tipos básicos son *integer* (_big integers_), *float*, *binary* (_array de bytes_, usado para representar strings) y *átomos* (*atoms*).
+* **¿Qué es un átomo?** Constante que empieza por `:` y que sólo se representa a si mismo.
 
-* **¿Qué es un átomo?** Constante que empieza por `:' y que sólo se representa a si mismo.
+<!-- livebook:{"break_markdown":true} -->
 
-  #### Números
+### Números
+
+**Importante:** observa la siguiente *celda*, coloca el cursor del ratón sobre ella y verás que aparece arriva a la izquierda un enlace para evaluar la expresión, **haz click**.
 
 ```elixir
 # Primo más pequeño que no cabe en 64 bits
 18_446_744_073_709_551_615
-
 ```
 
 ```elixir
-  # Pi
-  3.141592653589793
+# Pi
+3.141592653589793
 ```
 
 #### Binary (String)
 
 ```elixir
-  # Los strings
-  "Don't panic"
+# Los strings
+"Don't panic"
 ```
 
 ```elixir
-  # Un paquete IP
-  <<69,0,0,60,28,70,64,0,64,6,177,230,192,168,0,1,192,168,0,199,222,173,190,239,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0>>
+# Un paquete IP
+<<69,0,0,60,28,70,64,0,64,6,177,230,192,168,0,1,192,168,0,199,222,173,190,239,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0>>
 ```
 
 ```elixir
-  # Mi nombre, con acento, en UTF 8
-  <<195,129,110,103,101,108>>
+# Mi nombre, con acento, en UTF 8
+<<195,129,110,103,101,108>>
 ```
 
 #### Átomos
@@ -50,56 +70,59 @@
 * Convención: *:snake_case*
 
 ```elixir
-  :ok
+:ok
 ```
 
 ```elixir
-  :error
+:error
 ```
 
 ```elixir
-  :not_found
+:not_found
 ```
 
 #### Tres átomos especiales
 
 ```elixir
-  :true
+:true
 ```
 
 ```elixir
-  :false
+:false
 ```
 
 ```elixir
-  :nil
+:nil
 ```
 
 #### Operador de igualdad (==)
 
 ```elixir
-  :ok == :error
+:ok == :error
 ```
 
 ```elixir
-  :ok == :ok
+:ok == :ok
 ```
 
 ## Alan Turing vs Alonzo Church
 
 * En la década de 1930 se fijan dos modelos computaciones **equivalentes**: La máquina de Turing y el $\lambda$-Calculo de Church.
-* Los lenguajes imperativos (C, Java, Python, JS, etc.), en esencia, siguen el modelo de computación de las máquinas de Turing:
-  > Hay una serie de almacenes (variables mutables) de datos (el estado) y nuestros programas modifican esos almacenes, paso a paso, y el resultado de la computación queda en uno de esos almacenes.
+* Los **lenguajes imperativos** (C, Java, Python, JS, etc.), en esencia, siguen el modelo de computación de las **máquinas de Turing**:
 
-```python
+> Hay una serie de almacenes (variables mutables) de datos (el estado) y nuestros programas modifican esos almacenes, paso a paso, y el resultado de la computación queda en uno de esos almacenes.
+
+* Veamos un ejemplo sencillo en Python:
+
+  ```python
   n = 3
   suma = 0
   while n > 0:
-    suma += n
-    n -= 1
-```
+  suma += n
+  n -= 1
+  ```
 
-* En Python podemos seguir la ejecución paso a paso y entendemos cómo se modifican las variables hasta que el programa termina
+* Podemos seguir la ejecución paso a paso y entendemos cómo se modifican las variables hasta que el programa termina
 
 | Estado            | Paso           | Nuevo estado      |
 | ----------------- | -------------- | ----------------- |
@@ -118,8 +141,10 @@
 
 <!-- livebook:{"break_markdown":true} -->
 
-* Los lenguajes funcionales, en esencia, siguen el modelo de computación del $\lambda$-Cálculo:
-  > Un programa es un conjunto de funciones matemáticas y el resultado es lo que devuelve una función para ciertos datos. El modelo de computación es la reducción de expresiones: en cada paso de reducción se substituye una expresión (redex) por su definición
+* Los **lenguajes funcionales**, en esencia, siguen el modelo de computación del **$\lambda$-Cálculo**:
+
+> Un programa es un conjunto de funciones matemáticas y el resultado es lo que devuelve una función para ciertos datos. El modelo de computación es la **reducción de expresiones**: en cada paso de reducción se substituye una expresión (redex) por su definición
+
 * Veamos un ejemplo en Elixir de un programa con varias funciones: `(==)`, `(+)`, `(-)`, `if-then-else`, y `suma`.
 * La más importante para nosotros es `suma`:
 
@@ -132,10 +157,11 @@ end
 ```
 
 ```elixir
-  Suma.suma(3)
+Suma.suma(3)
 ```
 
-#### Reducción de expresiones
+* ¿Cómo se ejecuta esa expresión? ¿De qué forma la ejecución llega a 6?
+* Sigue atentamente la ejecución, paso a paso, en cada paso aparece subrayado la expresión que se va a **reducir** (**redex** = expresión reducible):
 
 `Suma.suma(3)`
 
@@ -145,7 +171,7 @@ $\rightarrow$ <ins>`if false do 1 else 3 + suma(3 - 1) end`</ins>
 
 $\rightarrow$ `3 + suma(`<ins>`3 - 1`</ins>`)`
 
-$\rightarrow$ `3 + `<ins>`suma(2)`</ins>`
+$\rightarrow$ `3 + `<ins>`suma(2)`</ins>
 
 $\rightarrow$ `3 + if `<ins>`2 == 1`</ins>`do 1 else 2 + suma(2 - 1) end`
 
@@ -170,13 +196,44 @@ $\rightarrow$ `6`
 * La recursión es uno de los elementos básicos de la programación funcional.
 * También, por experiencia, sabemos que es uno de los puntos más complejos de aprender.
 * Sin embargo es mucho más sencillo de lo que parece:
-  > Para definir una función recursiva basta con pensar que la función ya está hecha y ahora buscas los casos básicos en los que puedes definir la función. Ej. asumimos que `suma` ya funciona, entonces pensamos en un casos básico ($n = 1$, $resultado = 1$) y un caso no básico ($n > 1$): ¿puedo devolver el resultado suponiendo que `suma` ya funciona? Sí: $n + suma(n-1)$.
+
+> Para definir una función recursiva **basta con pensar que la función ya funciona** y ahora buscas los casos básicos en los que puedes definir la función. Ej. asumimos que `suma` ya funciona, entonces pensamos en un casos básico ($n = 1$, $resultado = 1$) y un caso no básico ($n > 1$): ¿puedo devolver el resultado suponiendo que `suma` ya funciona? Sí: $n + suma(n-1)$.
+
+## Practica la recursión
+
+¿Te suena esta succesión? :)
+
+| 0   | 1   | 1   | 2   | 3   | 5   | 8   | 13  | ... |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0   | 1   | 2   | 3   | 4   | 5   | 6   | 7   | ... |
+
+Completa la siguiente celda con la definición de una función a la que le pasas un índice y te devuelve el número de Fibonacci asociado a ese índice.
+
+Recuerda, asume que la función ya funciona y ahora piensa en los casos (índices 0, 1 y n > 1).
+
+```elixir
+defmodule Fib do
+  def fib(i) do
+    
+  end
+end
+```
+
+Y ahora prueba que tu función hace lo que tiene que hacer.
+
+```elixir
+Fib.fib(7)
+```
 
 ## Estructuras de datos
 
+Antes de continuar necesitamos estructuras de datos más potentes que los tipos básicos: introduciremos **tuplas** y **listas** aunque Elixir tiene estructuras más potentes aún como por ejemplo *diccionarios* (llamados *maps* en Elixir).
+
+<!-- livebook:{"break_markdown":true} -->
+
 ### Tuplas
 
-* _Producto cartesiano_
+* _Producto cartesiano_ de diferente aridad (tuplas de 2, 3, 4 elementos, etc.)
 * Sintaxis con llaves
 * Memoria contigua, no se suele hacer que crezcan o decrezcan
 
@@ -185,5 +242,56 @@ $\rightarrow$ `6`
 ```
 
 ```elixir
-{:error, 404}
+{:error, 404, "Resource not found"}
+```
+
+### Listas
+
+* Todos los lenguajes funcionales tienen listas
+* Una lista puede ser **la lista vacía**
+* O la lista que tiene **un elemento y un resto (otra lista)**
+* Como se puede ver la definición vuelva a hacer uso de la **recursión**
+* **Sintaxis de la lista vacía**:
+
+```elixir
+[]
+```
+
+* **Ya tenemos una lista**, la lista vacía
+* Ahora ya podemos construir una lista con un elemento.
+* **Sintaxis de la lista que tiene un primer elemento y un resto**
+  ```elixir
+  [ elemento | resto ]
+  ```
+* Es decir, se escribe `[`, luego el elemento, luego un *pipe* `|`, luego **otra lista** y luego `]`
+* ¿Puedes escribir tú la lista con un único elemento, el `1`?
+* Como idea date cuenta de que la única lista que conoces es `[]`
+
+```elixir
+# Escribe aquí la lista con un 1
+```
+
+* Haz click en la siguiente celda oculta y puedes ver la solución pulsando el icono `<>` en la parte superir derecha de la celda.
+
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJbIDEgfCBbXSBdIiwidGl0bGUiOiJIaWRkZW4gQ2VsbCJ9","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+
+```elixir
+[ 1 | [] ]
+```
+
+* ¿Y una lista con un 2 y un 1?
+* ¿Y con un 3, un 2 y un 1?
+* ¿Y con un 4, un 3, un 2 y un 1?
+
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJbNCB8IFsgMyB8IFsgMiB8IFsgMSB8IFtdIF0gXSBdIF0iLCJ0aXRsZSI6IkNlbGRhIGNvbiB1bmEgbGlzdGEgZGUgNCBlbGVtZW50b3MifQ","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+
+```elixir
+[4 | [ 3 | [ 2 | [ 1 | [] ] ] ] ]
+```
+
+* Ya habrás observado que Elixir, y cualquier otro lenguaje funcional, te ofrecerá una versión **azucarada** para escribir literales de listas: elementos separados por comas dentro de paréntesis cuadrados.
+* Sin embargo, no te dejes engañar por las apariencias porque internamente la representación es la que has visto anteriormente:
+
+```elixir
+[1 | [2 | [3 | [4 | []]]]]
 ```
