@@ -295,3 +295,71 @@ Antes de continuar necesitamos estructuras de datos más potentes que los tipos 
 ```elixir
 [1 | [2 | [3 | [4 | []]]]]
 ```
+
+## Variables matemáticas y la NO asignación
+
+* El segundo elemento fundamental de la programación funcional es que las variables no son almacenes de datos
+* Las variables en programación funcional son variables matemáticas
+* Cuando en programación funcional se escribe algo como `x = 42` lo que estamos diciendo es
+  > Sea x igual a 42 en la expresión siguiente
+* Probemos:
+
+```elixir
+x = 42
+x * x
+
+```
+
+* El operador `(=)` no es una asignación
+* Más bien es la igualdad de las matemáticas
+* El resultado es que las variables se *ligan* (*binding*) a valores para hacer cierta la ecuación
+* El lenguaje funcional intenta hacer cierta dicha igualdad *ligando* las variables involucradas
+* Los lenguajes funcionales imponen ciertas restricciones y sólo se van a *ligar* las variables cuando aparecen en la parte izquierda de la ecuación
+* Quizás te parezca que simplemente estamos cambiando la palabra *asignar* por *ligar* pero veremos que va máás allá.
+
+## Encaje de patrones (o Pattern Matching)
+
+* El segundo elemento fundamental de la programación funcional es el encaje de patrones
+* En Elixir hay una función para hacer una petición GET de HTTP: `:httpc.request/1` (el `/1` indica que la función admite un parámetro)
+* Para poder hacer esa llamada antes necesitamos poner en marcha dos servicios: SSL e INETS, lo hacemos así:
+
+```elixir
+:ssl.start()
+:inets.start()
+:ok
+```
+
+* Si la petición `:httpc.request/1` va bien, nos devuelve una tupla de dos elementos
+* El primer elemento es `:ok`
+* El segundo elemento es a su vez una tupla con tres elementos:
+  * El primer elemento es una tupla de tres elementos con la versión de HTTP, el estado de la respuesta (200, 404, 500, etc.) y el texto asociado al estado ("OK", "NOT FOUND", "SERVER ERROR")
+  * El segundo elemento es una lista con las cabeceras
+  * El tercero es una lista de caracteres con el *payload* de la respuesta
+* Vamos a escribir una *ecuación* para ligar varias variables con los valores mencionados con el resultado de invocar `:httpc.request("https://google.com")`:
+
+```elixir
+{:ok, {{protocol, status, status_txt}, headers, body}} = :httpc.request("https://google.com")
+```
+
+* Las variables `protocol`, `status`, `status_txt`, `headers` y `body` han quedado ligadas
+* Puedes comprobar tú mismo los valores a los que las variables ha quedado ligados:
+
+```elixir
+protocol
+```
+
+```elixir
+status
+```
+
+```elixir
+status_txt
+```
+
+```elixir
+headers
+```
+
+```elixir
+body
+```
