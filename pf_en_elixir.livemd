@@ -719,6 +719,41 @@ end
 * Para el caso de la lista vacía basta devolver `base`
 * Para el caso de la lista con un primer elemento y un resto hay que llamar recursivamente a `reduce` y, de alguna forma, hay que ejecutar la función usando el primer elemento de la lista y otro dato, ¿pero qué dato?
 
+## Orden superior (3/3)
+
+Estamos a punto de terminar el taller, espero que lo estés pasando bien :)
+
+* Hemos dicho que las funciones son **ciudanos de primer orden** y hemos visto ejemplos de cómo se pueden pasar funciones como parámetros y de lo útil que es.
+* Pero las funciones pueden también devoler funciones.
+* ¿Para qué podría servir algo así?
+* Imagina que necesitamos una función que genere saludos personalizados dependiendo del idioma.
+* La idea es que una función inicial reciba el idioma **y devuelva una función** que, a su vez, reciba el nombre de la persona para generar el saludo.
+
+```elixir
+defmodule Saludos do
+  def generar_saludo(idioma) do
+    case idioma do
+      :es -> fn nombre -> "Hola, #{nombre}!" end
+      :en -> fn nombre -> "Hello, #{nombre}!" end
+      :fr -> fn nombre -> "Bonjour, #{nombre}!" end
+      _ -> fn nombre -> "Hi, #{nombre}!" end
+    end
+  end
+end
+
+```
+
+```elixir
+# Usamos la función generadora
+saludo_es = Saludos.generar_saludo(:es)
+saludo_en = Saludos.generar_saludo(:en)
+
+# Aplicamos los saludos
+IO.puts saludo_es.("María")  # Resultado: "Hola, María!"
+IO.puts saludo_en.("John")  # Resultado: "Hello, John!"
+
+```
+
 ## Soluciones
 
 En esa sección puedes ver algunas soluciones a los ejercicios incluyendo comentarios explicativos. A continuación podrás ver una celda con los tests a esas soluciones.
