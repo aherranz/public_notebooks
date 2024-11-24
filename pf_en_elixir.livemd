@@ -4,6 +4,7 @@
 
 ```elixir
 Mix.install([{:hidden_cell, github: "BrooklinJazz/hidden_cell"}])
+
 ```
 
 ## Bienvenidos
@@ -33,9 +34,9 @@ La web en la que estás es un [Livebook](https://livebook.dev/), una *killer app
 
 <!-- livebook:{"break_markdown":true} -->
 
-### Números
+#### Números
 
-**Importante:** observa la siguiente *celda*, coloca el cursor del ratón sobre ella y verás que aparece arriva a la izquierda un enlace para evaluar la expresión, **haz click**.
+**Importante:** observa la siguiente *celda*, coloca el cursor del ratón sobre ella y verás que aparece arriba a la izquierda un enlace para evaluar la expresión, **haz click**.
 
 ```elixir
 # Primo más pequeño que no cabe en 64 bits
@@ -45,6 +46,12 @@ La web en la que estás es un [Livebook](https://livebook.dev/), una *killer app
 ```elixir
 # Pi
 3.141592653589793
+```
+
+* Tú misma puedes crear *celdas*. Pasa el cursor justo por debajo de este texto y crea una celda de código Elixir para calcularla longitud del ecuador de La Tierra sabiendo que su radio es 6378.
+
+```elixir
+# Longitud del ecuador
 ```
 
 #### Binary (String)
@@ -105,22 +112,42 @@ La web en la que estás es un [Livebook](https://livebook.dev/), una *killer app
 :ok == :ok
 ```
 
+### Módulos y funciones
+
+* Para poder definir *funciones* en Elixir éstas tienen que estar dentro de un módulo, seguro que identificas claramente las palabras clave que permiten definir módulos y funciones dentro:
+
+```elixir
+defmodule Universe do
+  def meaning(x) do
+    x + 1
+  end
+end
+```
+
+* Y a continuación puedes usar esa función de nombre `meaning` cualificando su nombre con el nombre del módulo `Universe`: `Universe.meaning(41)`
+* Bajo ningún concepto hay que confundir ese **punto** con el punto de invocación de métodos en los lenguajes orientados a objeto.
+* Prueba tú mismo el resultado
+
+```elixir
+Universe.meaning(41)
+```
+
 ## Alan Turing vs Alonzo Church
 
 * En la década de 1930 se fijan dos modelos computaciones **equivalentes**: La máquina de Turing y el $\lambda$-Calculo de Church.
 * Los **lenguajes imperativos** (C, Java, Python, JS, etc.), en esencia, siguen el modelo de computación de las **máquinas de Turing**:
 
-> Hay una serie de almacenes (variables mutables) de datos (el estado) y nuestros programas modifican esos almacenes, paso a paso, y el resultado de la computación queda en uno de esos almacenes.
+> Hay una serie de almacenes (variables mutables) de datos, **el estado** y nuestros programas imperativos modifican esos almacenes, paso a paso, y el resultado de la computación queda en uno de esos almacenes.
 
 * Veamos un ejemplo sencillo en Python:
 
-  ```python
-  n = 3
-  suma = 0
-  while n > 0:
-  suma += n
-  n -= 1
-  ```
+```python
+n = 3
+suma = 0
+while n > 0:
+suma += n
+n -= 1
+```
 
 * Podemos seguir la ejecución paso a paso y entendemos cómo se modifican las variables hasta que el programa termina
 
@@ -143,7 +170,7 @@ La web en la que estás es un [Livebook](https://livebook.dev/), una *killer app
 
 * Los **lenguajes funcionales**, en esencia, siguen el modelo de computación del **$\lambda$-Cálculo**:
 
-> Un programa es un conjunto de funciones matemáticas y el resultado es lo que devuelve una función para ciertos datos. El modelo de computación es la **reducción de expresiones**: en cada paso de reducción se substituye una expresión (redex) por su definición
+> Un programa funcional es un conjunto de funciones matemáticas y el resultado es lo que devuelve una función para ciertos datos. El modelo de computación es la **reducción de expresiones**: en cada paso de reducción se substituye una expresión (redex) por su definición
 
 * Veamos un ejemplo en Elixir de un programa con varias funciones: `(==)`, `(+)`, `(-)`, `if-then-else`, y `suma`.
 * La más importante para nosotros es `suma`:
@@ -199,7 +226,7 @@ $\rightarrow$ `6`
 
 > Para definir una función recursiva **basta con pensar que la función ya funciona** y ahora buscas los casos básicos en los que puedes definir la función. Ej. asumimos que `suma` ya funciona, entonces pensamos en un casos básico ($n = 1$, $resultado = 1$) y un caso no básico ($n > 1$): ¿puedo devolver el resultado suponiendo que `suma` ya funciona? Sí: $n + suma(n-1)$.
 
-## Practica la recursión
+## Practicando la recursión
 
 ¿Te suena esta succesión? :)
 
@@ -212,7 +239,7 @@ Completa la siguiente celda con la definición de una función a la que le pasas
 Recuerda, asume que la función ya funciona y ahora piensa en los casos (índices 0, 1 y n > 1).
 
 ```elixir
-defmodule Fib do
+defmodule Ej10 do
   def fib(i) do
     
   end
@@ -222,7 +249,7 @@ end
 Y ahora prueba que tu función hace lo que tiene que hacer.
 
 ```elixir
-Fib.fib(7)
+Ej10.fib(7)
 ```
 
 ## Estructuras de datos
@@ -362,4 +389,178 @@ headers
 
 ```elixir
 body
+```
+
+## Practicando el Pattern Matching
+
+* En este taller vamos a hacer todo a mano
+* Vamos a definir la función longitud sobre las listas
+* Para ello vamos a usar la recursión aplicando lo aprendido:
+  * Asumimos que la función **ya funciona**
+  * Pensamos en los casos básicos de los datos:
+    * lista vacía `[]`
+
+    * lista con al menos un elemento `[primero | resto]`
+  * Vamos a escribir una función por casos (¡como se hacía en las mates!)
+  * Cada caso es como definir una función pero su parámetro es un *patrón* en el que encaja cada caso
+
+```elixir
+defmodule Ej20 do
+  def long([]) do
+    # Escribe a continuación el valor de la longitud de la lista vacía en este caso
+  end
+
+  def long([primero | resto]) do
+    # Escribe a continuación la expresión de la longitud de la lista [primero | resto]
+    # asumiendo que la función long YA FUNCIONA
+  end
+end
+
+```
+
+* Prueba tu código con la siguiente celda:
+
+```elixir
+Ej20.long([9,8,7,6,5,4,3,2,1])
+```
+
+* Vete a la celda en la que está definido el módulo `Ej20` y añade una segunda función `sum` que sume todos los elementos de una lista.
+* Y a continuación vamos a escribir unos tests "de verdad"
+
+```elixir
+ExUnit.start(auto_run: false)
+
+defmodule Test20 do
+  use ExUnit.Case, async: true
+
+  test "long works" do
+    assert Ej20.long([]) == 0
+    assert Ej20.long([0]) == 1
+    assert Ej20.long([9,8]) == 2
+    assert Ej20.long([9,8,7,6,5,4,3,2,1]) == 9
+  end
+
+  test "sum works" do
+    assert Ej20.sum([]) == 0
+    assert Ej20.sum([0]) == 0
+    assert Ej20.sum([9,8]) == 17
+    assert Ej20.sum([9,8,7,6,5,4,3,2,1]) == 45
+  end
+end
+
+ExUnit.run()
+
+```
+
+## ¿Preguntas?
+
+Quizás este sea un buen momento para hacer preguntas si no las has hecho ya, claro. ¡¡¡Siénte libre!!!
+
+## Practicando con listas
+
+* ¿Se te ocurre alguna forma de representar los datos de temperatura de varias capitales?
+
+**Pista:** puedes usar listas de pares
+
+* En la siguiente celda vamos a ligar una variable `capitales` con una lista de pares capital-temperatura:
+
+```elixir
+capitales = [
+  {"Londres", 13.0},
+  {"París", 10.0},
+  {"Berlín", 5.0},
+  {"Roma", 13.0},
+  {"Lisboa", 22.0},
+  {"Moscú", 1.0},
+  {"Madrid", 16.0},
+  {"Ankara", 0.0},
+  {"Trípoli", 17.0},
+  {"Teherán", 10.0},
+  {"Atenas", 17.0},
+  {"Budapest", -3.0},
+  {"Varsovia", 2.0}
+]
+
+```
+
+Vamos a procesar esos datos escribiendo varias funciones en el siguiente módulo:
+
+* `celsius2fahrenheit`: devuelve la lista pero con la temperatura en grados Fahrenheit: $C \times \frac{9}{5} + 32$
+* `celsius2kelvin`: devuelve la lista pero con la temperatura en grados Kelvin: $C + 273.15$
+* `minimum`: devuelve la tupla con la mínima temperatura
+* `maximum`: devuelve la tupla con la máxima temperatura
+* `mean`: devuelve la temperatura media
+
+```elixir
+defmodule Ej30 do
+end
+```
+
+Puedes probar tu implementación con los siguientes tests:
+
+```elixir
+ExUnit.start(auto_run: false)
+
+defmodule Test30 do
+  use ExUnit.Case, async: true
+
+  test "c2f works" do
+    assert Ej30.celsius2fahrenheit(0.0) == 32.0
+    assert Ej30.celsius2fahrenheit(42.0) == 107.6
+    assert Ej30.celsius2fahrenheit(100.0) == 212.0
+  end
+
+  test "c2k works" do
+    assert Ej30.celsius2kelvin(0.0) == 0.0 + 273.15
+    assert Ej30.celsius2kelvin(42.0) == 42.0 + 273.15
+    assert Ej30.celsius2kelvin(100.0) == 100.0 + 273.15
+  end
+
+  test "min/max/mean work" do
+    capitales = [
+      {"Londres", 13.0},
+      {"París", 10.0},
+      {"Berlín", 5.0},
+      {"Roma", 13.0},
+      {"Lisboa", 22.0},
+      {"Moscú", 1.0},
+      {"Madrid", 16.0},
+      {"Ankara", 0.0},
+      {"Trípoli", 17.0},
+      {"Teherán", 10.0},
+      {"Atenas", 17.0},
+      {"Budapest", -3.0},
+      {"Varsovia", 2.0}
+    ]
+
+    assert Ej30.minimum(capitales) == {"Budapest", -3.0}
+    assert Ej30.maximum(capitales) == {"Lisboa", 22.0}
+    assert Ej30.mean(capitales) ==
+      Enum.reduce(capitales, 0, fn {_,c}, s -> s + c end) / length(capitales)
+  end
+end
+
+ExUnit.run()
+
+```
+
+## Orden superior
+
+* Otro elemento esencial de la programación funcional es el *orden superior*: las funciones son **ciudadanos de primera categoría** en el lenguaje.
+* Eso significa que las funciones pueden ser pasadas como parámetros y pueden ser devueltas como resultados.
+* ¿Te has fijado que las funciones `celsius2fahrenheit` y `celsius2kelvin` son *iguales*? La única diferencia es la fórmula que aplican en el recorrido.
+* En programación funcional (ahora ya heredado en tantos y tantos lenguajes imperativos) ese "patrón" lo puede realizar la función `map`.
+* `map` es una función de orden superior, toma una lista como primer elemento, una función como segundo argumento, y aplica la función a cada elemento de la lista.
+* Una definición recursiva por casos tendría este esquema por casos:
+  * El `map` de la lista vacía es la lista vacía.
+  * El `map` de una lista con un primer elemento y un resto es una lista cuyo primer elemento es aplicar la función al primer elemento de la lista y el resto se define recursivamente.
+
+**Importante:** En Elixir, la forma de escribir que una función ligada en una variable `f` se aplica a un valor `v` es usando el `.` como **operador de aplicación de funciones**: `f.(v)`.  Personalmente creo es una de las cosas más feas de Elixir.
+
+El siguiente ejercicio consiste en definir un módulo `Ej40` que contendrá algunas funciones de orden superior siendo `map` la primera.
+
+```elixir
+defmodule Ej40 do
+  
+end
 ```
