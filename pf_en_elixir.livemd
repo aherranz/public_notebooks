@@ -584,54 +584,51 @@ Quizás ya hayas encontrado una posibilidad para *modificar* la variable `capita
 capitales = Ej40.insert(capitales, {"Munich", 5})
 ```
 
-Quizás hayas intentado hacer algo omo esto
+Seguro que has pensado, **¡Te he pillado! Con que no tiene estado, ¿eh?**.
 
-El concepto que permite hacer un **rebinding** (reasignación) de una variable en un lenguaje funcional se conoce como ***sombras de variables*** o *variable shadowing*.
+Realmente sigue sin haber estado, las variables realmente no pueden cambiar y lo que ocurre es que Elixir (y muchos otros lenguajes funcionales) permiten el **shadowing** de variables.
 
-### **¿Qué es el shadowing?**
+* Al volver a hacer un *matching* con una variable que ya estaba ligada lo que estamos haciendo es introducir una **nueva variable** con el mismo nombre y hacer que **la anterior deje de ser visible**.
+* Esto significa que no hay nada que puedas hacer con la nueva variable que permita modificar un dato previo y por lo tanto se conserva la inmutabilidad.
 
-El shadowing ocurre cuando una nueva definición de una variable "oculta" (o *somete a sombra*) una definición previa en el mismo contexto o ámbito. Aunque parezca que estamos modificando la variable original, en realidad estamos creando una nueva con el mismo nombre, válida solo en el ámbito actual. Esto respeta la inmutabilidad de los datos, ya que no cambia el valor de la variable original.
-
----
-
-### **Ejemplo en Elixir**
-
-En Elixir, debido a su naturaleza funcional, las variables no son reasignadas. Sin embargo, el shadowing permite usar el mismo nombre en un nuevo contexto:
-
-<!-- livebook:{"force_markdown":true} -->
+Supongamos que tenemos las capitales originales:
 
 ```elixir
-x = 5
-x = x + 3  # Esto no modifica la variable original, sino que crea una nueva
-IO.puts(x) # Resultado: 8
+capitales = [
+  {"Londres", 13.0},
+  {"París", 10.0},
+  {"Berlín", 5.0},
+  {"Roma", 13.0},
+  {"Lisboa", 22.0},
+  {"Moscú", 1.0},
+  {"Madrid", 16.0},
+  {"Ankara", 0.0},
+  {"Trípoli", 17.0},
+  {"Teherán", 10.0},
+  {"Atenas", 17.0},
+  {"Budapest", -3.0},
+  {"Varsovia", 2.0}
+]
+
 ```
 
-En este ejemplo:
+Supongamos que queremos crear un dato con las capitales y el número de capitales:
 
-1. `x = 5` define la primera variable.
-2. `x = x + 3` no modifica el `x` original, sino que genera una nueva "versión" de `x`.
-3. La antigua versión de `x` (con valor `5`) queda inaccesible en este ámbito.
+```elixir
+cuenta_capitales = {length(capitales), capitales}
+```
 
----
+Y supongamos que "cambiamos" `capitales`:
 
-### **Ventajas del shadowing**
+```elixir
+capitales = Ej40.insert(capitales, {"Munich", 5})
+```
 
-1. **Permite un código más legible**: Usar el mismo nombre para representar el mismo concepto evita la proliferación de nombres como `x1`, `x2`, etc.
-2. **Respeta la inmutabilidad**: No altera el valor original, lo que es crucial en programación funcional.
-3. **Evita errores**: Ayuda a mantener un flujo lógico y reduce la posibilidad de errores causados por estados inesperados.
+¿Qué pasa con `cuenta_capitales`?
 
----
-
-### **Shadowing vs Rebinding**
-
-Es importante distinguir **shadowing** de un **rebinding real**:
-
-* En lenguajes funcionales como Elixir, el shadowing no modifica la variable original; simplemente define un nuevo binding en el ámbito actual.
-* En lenguajes imperativos como Python o Java, el rebinding puede realmente alterar el valor asociado a una variable.
-
----
-
-¿Te gustaría explorar más casos prácticos o comparar cómo este concepto se aplica en otros lenguajes?
+```elixir
+cuenta_capitales
+```
 
 ## Orden superior (1/3)
 
