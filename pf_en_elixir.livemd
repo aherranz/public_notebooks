@@ -754,6 +754,12 @@ IO.puts saludo_en.("John")  # Resultado: "Hello, John!"
 
 ```
 
+## 1BRC
+
+Mi última propuesta es que intentes escribir usando orden superior básico (*maps* y *reduces*) una función que sea capaz de procesar entradas como las del reto [The One Billion Row Challenge](https://www.morling.dev/blog/one-billion-row-challenge/):
+
+* La entrada ...
+
 ## Soluciones
 
 En esa sección puedes ver algunas soluciones a los ejercicios incluyendo comentarios explicativos. A continuación podrás ver una celda con los tests a esas soluciones.
