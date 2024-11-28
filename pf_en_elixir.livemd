@@ -762,7 +762,7 @@ IO.puts(saludo_en.("John"))
 
 Mi última propuesta es que intentes escribir usando orden superior básico (*maps* y *reduces*) una función que sea capaz de procesar entradas como las del reto [The One Billion Row Challenge](https://www.morling.dev/blog/one-billion-row-challenge/):
 
-* Por supuesto no vamos a procesar un *billion* (1000 millones) de datos ciudad-temperatura, pero tendremos tres ficheros: uno con 1000 entradas para probar, otro con 1 millón para ver que vamos bien de velocidad y otro con 100 millones para hacer una prueba más atrevida si la de 1 millón ha ido razonablemente bien.
+* Por supuesto no vamos a procesar un *billion* (1000 millones) de datos ciudad-temperatura, pero tendremos dos ficheros: uno con 1000 entradas para probar, otro con 1 millón para ver que vamos razonablemente bien de velocidad.
 * Cada línea del fichero de entrada tiene un nombre de ciudad y una temperatura.
 * La salida la vamos a dar en forma de lista de tuplas de esta forma `{nombre_de_ciudad, {temp_minima, temp_maxima, temp_media}}` donde no se puede repetir la misma ciudad (¡Eso es un diccionario!)
 * Piensa en el algoritmo y mira a ver si se parece a este que te propongo:
@@ -903,6 +903,10 @@ end
 ```
 
 * Pues ya tenemos todo para dejar en una variable `paso5` la lista ordenada con los datos del reto
+
+### Prueba con 1 millón
+
+* Sube hasta la celda con las medidas y cambia el fichero a `"/data/files/measurements_1mrc.txt"`
 
 ## Soluciones
 
