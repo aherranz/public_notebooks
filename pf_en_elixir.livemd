@@ -390,7 +390,7 @@ headers
 body
 ```
 
-* `body` es la lista de bytes representando los caracteres el el *body* de la respuesta, puedes pedirle a Elixir que lo imprima
+* `body` es la lista de bytes representando los caracteres el el *body* de la respuesta, puedes pedirle a Elixir que lo imprima en la salida estándar.
 
 ```elixir
 IO.puts(body)
@@ -643,11 +643,17 @@ cuenta_capitales
 
 **Importante:** En Elixir, la forma de escribir que una función ligada en una variable `f` se aplica a un valor `v` es usando el `.` como **operador de aplicación de funciones**: `f.(v)`.  Personalmente creo es una de las cosas más feas de Elixir.
 
-El siguiente ejercicio consiste en definir un módulo `Ej40` que contendrá algunas funciones de orden superior siendo `map` la primera.
+El siguiente ejercicio consiste en definir un módulo `Ej50` que contendrá algunas funciones de orden superior siendo `map` la primera. Defínela por casos tal y como está indicado:
 
 ```elixir
 defmodule Ej50 do
+  def map([],f) do
+    
+  end
   
+  def map([x | xs], f) do
+    
+  end
 end
 ```
 
@@ -741,13 +747,14 @@ end
 ```
 
 ```elixir
-# Usamos la función generadora
 saludo_es = Saludos.generar_saludo(:es)
 saludo_en = Saludos.generar_saludo(:en)
 
-# Aplicamos los saludos
-IO.puts saludo_es.("María")  # Resultado: "Hola, María!"
-IO.puts saludo_en.("John")  # Resultado: "Hello, John!"
+# saludos_es y saludos_en son funciones que esperan el nombre
+# de una persona para saludar en el idioma adecuado
+
+IO.puts(saludo_es.("María"))
+IO.puts(saludo_en.("John"))
 
 ```
 
@@ -755,7 +762,147 @@ IO.puts saludo_en.("John")  # Resultado: "Hello, John!"
 
 Mi última propuesta es que intentes escribir usando orden superior básico (*maps* y *reduces*) una función que sea capaz de procesar entradas como las del reto [The One Billion Row Challenge](https://www.morling.dev/blog/one-billion-row-challenge/):
 
-* La entrada ...
+* Por supuesto no vamos a procesar un *billion* (1000 millones) de datos ciudad-temperatura, pero tendremos tres ficheros: uno con 1000 entradas para probar, otro con 1 millón para ver que vamos bien de velocidad y otro con 100 millones para hacer una prueba más atrevida si la de 1 millón ha ido razonablemente bien.
+* Cada línea del fichero de entrada tiene un nombre de ciudad y una temperatura.
+* La salida la vamos a dar en forma de lista de tuplas de esta forma `{nombre_de_ciudad, {temp_minima, temp_maxima, temp_media}}` donde no se puede repetir la misma ciudad (¡Eso es un diccionario!)
+* Piensa en el algoritmo y mira a ver si se parece a este que te propongo:
+  1. Leer todas las líneas (lista de strings).
+  2. Procesar cada string para generar una tupla `{nombre_de_ciudad, medida}`.
+  3. Empezar con un diccionario vacío y procesar cada tupla anterior *actualizando* el diccionario, cada entrada del diccionario tiene esta forma `{nombre_de_ciudad,{medida_min, medida_max, medida_suma, num_medidas}}`
+  4. Se procesa el diccionario para calcular la media.
+  5. Finalmente el reto exige que el resultado esté ordenado alfabéticamente por ciudad.
+
+<!-- livebook:{"break_markdown":true} -->
+
+### Paso 1 y 2: lectura de medidas
+
+* Te *regalo* un código que devuelve la lista de medidas en una lista de tuplas como las acordadas: `{nombre_de_ciudad, medida}` (variable `medidas`)
+* Observa el uso de la función de orden superior `map` para convertir cada string en una tupla.
+
+```elixir
+stream = File.stream!("/data/files/measurements_1krc.txt")
+paso1 = Enum.to_list(stream)
+paso2 = Ej50.map(
+  lineas,
+  fn linea ->
+    [ciudad, medida_str] = String.split(linea, ";")
+    {medida, "\n"} = Float.parse(medida_str)
+    {ciudad, medida}
+  end
+) 
+```
+
+### Diccionario
+
+* Para poder realizar los pasos 3 y 4 del algoritmo necesitamos un módulo para implemnentar las funciones de un diccionario.
+* Seguro que puedes completarlo.
+
+```elixir
+defmodule Ej80 do
+  def get(dict, key) do
+    # Devuelve {:ok, value} si se encuentra key y :error
+    # si no se encuentra
+  end
+
+  def put(dict, key, value) do
+    # Devuelve el diccionario actualizando key con value
+  end
+
+  def update(dict, key, f) do
+    # Actualiza el diccionario con un nuevo valor para key
+    # calculado con la función f (que recibe como argumento
+    # el valor antiguo). Devuelve dict si key no se encuentra.
+  end
+end
+```
+
+```elixir
+ExUnit.start(auto_run: false)
+
+defmodule TestDict do
+  use ExUnit.Case, async: true
+
+  test "dict works" do
+    dic0 = []
+
+    assert Ej80.get(dic0,"a") == :error
+
+    dic1 = Ej80.put(dic0,"z",1)
+
+    # Se puede "asertar" que se puede hacer patern matching
+    assert :error = Ej80.get(dic1,"a")
+    assert {:ok, 1} = Ej80.get(dic1,"z")
+
+    dic4 = [{"a",1}, {"b", 2}, {"c", 3}, {"d",4}]
+    assert :error = Ej80.get(dic4,"z")
+    assert {:ok, 1} = Ej80.get(dic4,"a")
+    assert {:ok, 3} = Ej80.get(dic4,"c")
+    assert {:ok, 4} = Ej80.get(dic4,"d")
+
+    dic5 = Ej80.put(dic4, "e", 5)
+    assert :error = Ej80.get(dic5,"z")
+    assert {:ok, 1} = Ej80.get(dic5,"a")
+    assert {:ok, 3} = Ej80.get(dic5,"c")
+    assert {:ok, 4} = Ej80.get(dic5,"d")
+    assert {:ok, 5} = Ej80.get(dic5,"e")
+
+    # Shadowing de dict5!
+    dic5 = Ej80.put(dic5, "a", 42)
+    dic5 = Ej80.put(dic5, "c", 43)
+    dic5 = Ej80.put(dic5, "e", 44)
+    assert :error = Ej80.get(dic5,"z")
+    assert {:ok, 42} = Ej80.get(dic5,"a")
+    assert {:ok, 2} = Ej80.get(dic5,"b")
+    assert {:ok, 43} = Ej80.get(dic5,"c")
+    assert {:ok, 44} = Ej80.get(dic5,"e")
+
+    inc = fn x -> x + 1 end
+    assert {:ok, 3} = Ej80.get(Ej80.update(dic5,"b",inc), "b")
+
+    # Cuidado porque esto no tiene porqué ser así
+    # (ej. update podría invertir el diccionario)
+    assert Ej80.update(dic5,"z",inc) == dic5
+  end
+end
+
+ExUnit.run()
+
+```
+
+### Paso 3
+
+* En este paso *reduciremos* la lista con la función de orden superior `Ej70.reduce`
+* La función reduce necesita tres argumentos:
+  1. la **lista de entrada** (las medidas)
+  2. el caso **base** para cuando la lista anterior no tenga datos (un diccionario)
+  3. la **función de acumulación** (que toma una medida y un diccionario y actualiza el diccionario con esa medida)
+* Puedes dejar la lista en una variable que se llame `paso3`
+
+<!-- livebook:{"break_markdown":true} -->
+
+### Paso 4
+
+* El paso 3 acumulaba, por cada ciudad, temperatura mínima, máxima, suma de las medidas y número de medidas.
+* Por cada entrada hay que dejar mínima y máxima y calcular la media
+* Puedes dejar la lista en una variable `paso4`
+
+<!-- livebook:{"break_markdown":true} -->
+
+### Paso 5
+
+* Para ordenar la lista te propongo implementar una función de orden superior para ordenar
+* Es de orden superior porque recibe la lista de entrada y una función de comparación (menor o igual)
+* Puedes implementar un merge-sort (necesitarás tres funciones, la función de ordenación en si misma, una para partir una lista en dos, y otra para mezclar dos listas y ordenadas)
+
+```elixir
+defmodule Ej90 do
+  def sort(l, c) do
+  
+  end
+end
+```
+
+* Pues ya tenemos todo para dejar en una variable `paso5` la lista ordenada con los datos del reto
 
 ## Soluciones
 
@@ -795,6 +942,31 @@ defmodule Sol do
   end
   def reduce_right([x | xs], acc, f) do
     f.(reduce_right(xs, acc, f), x)
+  end
+
+  # Funciones del diccionario
+  def get(dict, key) do
+    case dict do
+      [] -> :error
+      [{^key, value} | _] -> {:ok, value}
+      [_ | es ] -> get(es, key)
+    end
+  end
+
+  def put(dict, key, value) do
+    case dict do
+      [] -> [{key, value}]
+      [{^key, _} | es] -> [{key, value} | es]
+      [e | es ] -> [e | put(es, key, value)]
+    end
+  end
+
+  def update(dict, key, f) do
+    case dict do
+      [] -> []
+      [{^key, v} | es] -> [{key, f.(v)} | es]
+      [e | es ] -> [e | update(es, key, f)]
+    end
   end
 end
 
