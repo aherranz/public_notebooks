@@ -21,20 +21,20 @@ La web en la que estás es un [Livebook](https://livebook.dev/), una *killer app
 
 ## Un poco de sintaxis para poder hablar Elixir
 
-* Elixir es lenguaje con mucho azucar sintáctico (syntaxis diseñada para hacer las cosas más _dulces_ tanto para escribir como para leer, con el **coste de que el lenguaje es menos uniforme y consistente**)
+* Elixir es lenguaje con mucho azúcar sintáctico (sintaxis diseñada para hacer las cosas más _dulces_ tanto para escribir como para leer, con el **coste de que el lenguaje es menos uniforme y consistente**)
   > **_Sintactic sugar causes cancer of semicolon_** (Alan J. Perlis)
 * No voy a usar azucar sintáctico en este taller (aunque a veces no podremos escapar de ello porque Elixir va a responder _azucarando_ algunos resultados).
 
 ## Tipos básicos
 
 * Los tipos básicos son *integer* (_big integers_), *float*, *binary* (_array de bytes_, usado para representar strings) y *átomos* (*atoms*).
-* **¿Qué es un átomo?** Constante que empieza por `:` y que sólo se representa a si mismo.
+* **¿Qué es un átomo?** Constante que empieza por `:` y que sólo se representa a sí mismo.
 
 <!-- livebook:{"break_markdown":true} -->
 
 ### Números
 
-**Importante:** observa la siguiente *celda*, coloca el cursor del ratón sobre ella y verás que aparece arriba a la izquierda un enlace para evaluar la expresión, **haz click** y verás el resultado.
+**Importante:** observa la siguiente *celda*, coloca el cursor del ratón sobre ella y verás que aparece arriba a la izquierda un enlace con texto *Evaluate* o *Reevaluate* para evaluar la expresión, **haz click** y verás el resultado.
 
 ```elixir
 # Primo más pequeño que no cabe en 64 bits
@@ -46,7 +46,8 @@ La web en la que estás es un [Livebook](https://livebook.dev/), una *killer app
 3.141592653589793
 ```
 
-* Tú misma puedes crear *celdas*. Pasa el cursor justo por debajo de este texto y crea una celda de código Elixir para calcularla longitud del ecuador de La Tierra sabiendo que su radio es 6378.
+* Como ya has visto el símbolo `#` inicia un comentario de línea
+* Tú misma puedes crear *celdas*. Pasa el cursor justo por debajo de este texto y crea una celda de código Elixir para calcular la longitud del ecuador del planeta Tierra sabiendo que su radio es 6378
 
 ```elixir
 # Longitud del ecuador
@@ -110,9 +111,29 @@ La web en la que estás es un [Livebook](https://livebook.dev/), una *killer app
 :ok == :ok
 ```
 
+## Variables y expresiones
+
+* Las *variables* en Elixir empiezan por minúscula
+* Aunque lo vamos a ver con más detalle, las *variables* en los lenguajes funcionales **no son almacenes de datos**, son como las **variables matemáticas** que se pueden ligar a un valor como en una ecuación matemática
+* En Elixir se pueden escribir expresiones, una por línea, el resultado final es la última expresión que se escriba
+
+Por ejemplo:
+
+```elixir
+pi = 3.141592653589793
+r = 6378
+2 * pi * r
+
+```
+
+La forma más acertada de leer toda esa expresión es
+
+> **Sea `pi` igual a 3.14..., sea `r` igual a 6378, en la expresión `2*pi*r`**
+
 ## Módulos y funciones
 
-* Para poder definir *funciones* en Elixir éstas tienen que estar dentro de un módulo, seguro que identificas claramente las palabras clave que permiten definir módulos y funciones dentro:
+* Para poder definir *funciones* (sus nombres empiezan por minúscula) en Elixir éstas tienen que estar dentro de un módulo (cuyo nombre empieza por mayúscula a los efectos de este taller)
+* Deguro que identificas claramente las palabras clave que permiten definir módulos y funciones *dentro* de los módulos:
 
 ```elixir
 defmodule Universe do
@@ -132,10 +153,10 @@ Universe.meaning(41)
 
 ## Alan Turing vs Alonzo Church
 
-* En la década de 1930 se fijan dos modelos computaciones **equivalentes**: La máquina de Turing y el $\lambda$-Calculo de Church.
+* En la década de 1930 se fijan dos modelos computaciones **equivalentes**: La máquina de Turing y el $\lambda$-Cálculo de Church.
 * Los **lenguajes imperativos** (C, Java, Python, JS, etc.), en esencia, siguen el modelo de computación de las **máquinas de Turing**:
 
-> Hay una serie de almacenes (variables mutables) de datos, **el estado** y nuestros programas imperativos modifican esos almacenes, paso a paso, y el resultado de la computación queda en uno de esos almacenes.
+> Hay una serie de almacenes *mutables* de datos (variables), **el estado**, nuestros programas imperativos modifican esos almacenes, paso a paso, y el resultado de la computación queda en uno de esos almacenes.
 
 * Veamos un ejemplo sencillo en Python:
 
@@ -226,7 +247,7 @@ $\rightarrow$ `6`
 
 ## Practicando la recursión
 
-¿Te suena esta succesión? :)
+¿Te suena esta sucesión? :)
 
 | 0   | 1   | 1   | 2   | 3   | 5   | 8   | 13  | ... |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -252,7 +273,8 @@ Ej10.fib(7)
 
 ## Estructuras de datos
 
-Antes de continuar necesitamos estructuras de datos más potentes que los tipos básicos: introduciremos **tuplas** y **listas** aunque Elixir tiene estructuras más potentes aún como por ejemplo *diccionarios* (llamados *maps* en Elixir).
+* Antes de continuar necesitamos estructuras de datos más potentes que los tipos básicos: introduciremos **tuplas** y **listas**
+* **Nota:** Elixir tiene estructuras más potentes aún como por ejemplo *diccionarios* (llamados *maps* en Elixir, **no confundir con la función *map* que veremos en el taller)
 
 <!-- livebook:{"break_markdown":true} -->
 
@@ -261,6 +283,7 @@ Antes de continuar necesitamos estructuras de datos más potentes que los tipos 
 * _Producto cartesiano_ de diferente aridad (tuplas de 2, 3, 4 elementos, etc.)
 * Sintaxis con llaves
 * Memoria contigua, no se suele hacer que crezcan o decrezcan
+* Veamos un par de ejemplos que representan las posibles respuestas de un servidor HTTP
 
 ```elixir
 {:ok, "<!DOCTYPE html><html>...</html>"}
@@ -284,11 +307,11 @@ Antes de continuar necesitamos estructuras de datos más potentes que los tipos 
 
 * **Ya tenemos una lista**, la lista vacía
 * Ahora ya podemos construir una lista con un elemento.
-* **Sintaxis de la lista que tiene un primer elemento y un resto**
+* **Sintaxis de la lista que tiene un primer elemento y un resto:**
   ```elixir
   [ elemento | resto ]
   ```
-* Es decir, se escribe `[`, luego el elemento, luego un *pipe* `|`, luego **otra lista** y luego `]`
+* Es decir, se escribe `[`, luego el elemento, luego el caracter *pipe* `|`, luego **otra lista** y luego `]`
 * ¿Puedes escribir tú la lista con un único elemento, el `1`?
 * Como idea date cuenta de que la única lista que conoces es `[]`
 
@@ -296,7 +319,7 @@ Antes de continuar necesitamos estructuras de datos más potentes que los tipos 
 # Escribe aquí la lista con un 1
 ```
 
-* A continuación tienes una celda oculta que puedes evaliar. Puedes ver la solución haciendo click en la cenda y luego pulsando el icono `<>` en la parte superir derecha.
+* A continuación tienes una celda oculta que puedes evaluar. Puedes ver la solución haciendo click en la propia celda y luego pulsando el icono `<>` en la parte superior derecha.
 
 <!-- livebook:{"attrs":"eyJzb3VyY2UiOiJbIDEgfCBbXSBdIiwidGl0bGUiOiJDZWxkYSBjb24gdW5hIGxpc3RhIGNvbiB1biAxIn0","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
@@ -338,10 +361,9 @@ x * x
 * El operador `(=)` **no es una asignación**
 * Más bien es la **igualdad de las matemáticas**
 * Se le puede llamara **operador de matching**
-* El resultado es que las variables se *ligan* (*binding*) a valores para hacer cierta la ecuación
-* El lenguaje funcional intenta hacer cierta dicha igualdad *ligando* las variables involucradas
+* El lenguaje funcional intenta hacer cierta dicha igualdad *ligando* (*binding*) las variables involucradas
 * Los lenguajes funcionales imponen ciertas restricciones y sólo se van a *ligar* las variables cuando aparecen en la parte izquierda de la ecuación
-* Quizás te parezca que simplemente estamos cambiando la palabra *asignar* por *ligar* pero veremos que va más allá.
+* Quizás te parezca que simplemente estamos cambiando la palabra *asignar* por *ligar* pero veremos que va más allá
 
 ## Encaje de patrones (o Pattern Matching)
 
@@ -358,7 +380,10 @@ x * x
 * Si la petición `:httpc.request/1` va bien, nos devuelve una tupla de dos elementos
 * El primer elemento es `:ok`
 * El segundo elemento es a su vez una tupla con tres elementos:
-  * El primer elemento es una tupla de tres elementos con la versión de HTTP, el estado de la respuesta (200, 404, 500, etc.) y el texto asociado al estado ("OK", "NOT FOUND", "SERVER ERROR")
+  * El primer elemento es a su vez una tupla de tres elementos:
+    * la versión de HTTP,
+    * el estado de la respuesta (200, 404, 500, etc.)
+    * y el texto asociado al estado ("OK", "NOT FOUND", "SERVER ERROR")
   * El segundo elemento es una lista con las cabeceras
   * El tercero es una lista de caracteres con el *payload* de la respuesta
 * Vamos a escribir una *ecuación* para ligar varias variables con los valores mencionados con el resultado de invocar `:httpc.request("https://google.com")`:
@@ -407,7 +432,7 @@ IO.puts(body)
 
     * lista con al menos un elemento `[primero | resto]`
   * Vamos a escribir una función por casos (¡como se hacía en las mates!)
-  * Cada caso es como definir una función pero su parámetro es un *patrón* en el que encaja cada caso
+  * Cada caso es como definir una función pero su parámetro es un *patrón* en el que encaja dicho caso
 
 ```elixir
 defmodule Ej20 do
@@ -464,9 +489,7 @@ Quizás este sea un buen momento para hacer preguntas si no las has hecho ya, cl
 ## Practicando con listas
 
 * ¿Se te ocurre alguna forma de representar los datos de temperatura de varias capitales?
-
-**Pista:** puedes usar listas de pares
-
+* **Pista:** puedes usar listas de pares
 * En la siguiente celda vamos a ligar una variable `capitales` con una lista de pares capital-temperatura:
 
 ```elixir
@@ -555,7 +578,7 @@ ExUnit.run()
 * En un lenguaje orientado a objetos podríamos programar un método `insert` que podríamos invocar sobre `capitales` (algo parecido a `capitales.insert({"Munich", 5})`) para poder **modificar el objeto**.
 * En un lenguaje funcional esa posibilidad no existe, **cualquier dato computado por el lenguaje no es posible modificarlo**.
 * Esta propiedad, la **inmutabilidad**, facilita el razonamiento sobre el código y hace la concurrencia más manejable.
-* Te reto a que implementes una función que mute el contenido de una lista, por ejemplo una función que actualice las capitales añadiendo otra (ej. `{"Munich", 5}` como primer o último elemento):
+* Te reto a que implementes una función que mute el contenido de una lista, por ejemplo una función que actualice las capitales añadiendo otra (ej. `{"Munich", 5}`) como primer o último elemento:
 
 ```elixir
 defmodule Ej40 do
