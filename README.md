@@ -4,6 +4,9 @@ This repo contains some of my livebook notebooks that I have used in Workshops a
 
  🇪🇸 *Este repo contiene algunos de mis cuadernos de livebooks.*
 
+## Feedback is welcome!
+
+Please, [create an issue](https://github.com/aherranz/public_notebooks/issues/new) if you find erros or simply want to discuss about the content of a notebook.
 
 ## Start livebook from docker
 
