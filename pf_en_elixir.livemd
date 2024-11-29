@@ -17,7 +17,15 @@ Mix.install([{:hidden_cell, github: "BrooklinJazz/hidden_cell"}])
 
 Como vehículo de aprendizaje vas a usar el lenguaje de programación [Elixir](https://elixir-lang.org/), un lenguaje funcional moderno y lleno de nuevas ideas, abordaremos los principios de la programación funcional sin la complejidad que suele asociarse a esta: inmutabilidad, recursividad, pattern matching y funciones de orden superior.
 
-La web en la que estás es un [Livebook](https://livebook.dev/), una *killer application* de Elixir que te va a permitir **no solo ejecutar código Elixir** si no **también modificarlo** y **reejecutarlo** para poder hacer tus propias exploraciones y pruebas. Como referencia, es una aplicación similar a Jupyter, es un entorno de desarrollo interactivo que permite compartir conocimiento, desplegar aplicaciones, visualizar datos, ejecutar modelos de aprendizaje, depurar, etc.
+<!-- livebook:{"break_markdown":true} -->
+
+Este taller se ha preparado en forma de **cuaderno Livebook**. [Livebook](https://livebook.dev/), una *killer application* de Elixir que te va a permitir **no solo ejecutar código Elixir** si no **también modificarlo** y **reejecutarlo** para poder hacer tus propias exploraciones y pruebas. Como referencia, es una aplicación similar a Jupyter, es un entorno de desarrollo interactivo que permite compartir conocimiento, desplegar aplicaciones, visualizar datos, ejecutar modelos de aprendizaje, depurar, etc.
+
+Quizás la forma más sencilla de hacer el taller sea descargar este fichero en un directorio y poner en marcha Livebook usando un contenedor:
+
+```bash
+docker run -p 8080:8080 -p 8081:8081 --pull always -u $(id -u):$(id -g) -v $(pwd):/data ghcr.io/livebook-dev/livebook:0.14.5
+```
 
 ## Un poco de sintaxis para poder hablar Elixir
 
