@@ -10,17 +10,18 @@ Please, [create an issue](https://github.com/aherranz/public_notebooks/issues/ne
 
 ## Start livebook from docker
 
-This command starts Livebook, a webserver, in a container mounting the
+This command starts the Livebook webapp in a container mounting the
 host working directory in the `/data` directory in the container.
 
 ```
 docker run -p 8080:8080 -p 8081:8081 --pull always -u $(id -u):$(id -g) -v $(pwd):/data ghcr.io/livebook-dev/livebook:0.14.5
 ```
 
-Using Livebook is easy, once started copy and paste in the browser the
-URL from the command in the browser, and open up any of the notebooks
-(you can download and open the lifes or you can open any of them
-copying the URL).
+Open in a browser the URL where the Livebook server is running at. Then you can
+*Open* a notebook directly from a URL (e.g. [this functional
+programming workshop
+URL](https://github.com/aherranz/public_notebooks/blob/main/pf_en_elixir.livemd))
+or from any file that you have previously downloaded.
 
 **Security Note:** Livebook has access to any file and can execute any
 code so using this command at least we confine the problem to the
