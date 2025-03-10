@@ -10,14 +10,20 @@ Please, [create an issue](https://github.com/aherranz/public_notebooks/issues/ne
 
 ## Start livebook from docker
 
-This command starts the Livebook webapp in a container mounting the
+Although it is not absolutely needed, I recommend you to clone this
+repo and `cd` to the directory.
+
+The following command starts the Livebook webapp in a container mounting the
 host working directory in the `/data` directory in the container.
 
 ```
 docker run -p 8080:8080 -p 8081:8081 --pull always -u $(id -u):$(id -g) -v $(pwd):/data ghcr.io/livebook-dev/livebook:0.14.5
 ```
 
-Open in a browser the URL where the Livebook server is running at. Then you can
+Open in a browser the URL where the Livebook server is running at. If
+your working directory is a clone of this repo you can *Open* any of
+my notebooks (e.g.  the functional programming workshop
+`pf_en_elixir.livemd`). If you decided not to clone this repo, you can
 *Open* a notebook directly from a URL (e.g. [this functional
 programming workshop
 URL](https://github.com/aherranz/public_notebooks/blob/main/pf_en_elixir.livemd))
