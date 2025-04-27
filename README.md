@@ -37,8 +37,17 @@ container itself and to the host working directory.
 
 After starting livebook you can open any of theese notebooks:
 
-- 🇪🇸 [pf_en_elixir.livemd](pf_en_elixir.livemd): Cuaderno con un
-  taller para acercar la programación funcional a programadores con o
-  sin experiencia en la misma. Se tratan los elementos fundamentales
-  de la programación funcional: inmutabilidad, recursividad, pattern
+- 🇪🇸 **Taller de programación funcional**
+  ([pf_en_elixir.livemd](pf_en_elixir.livemd)): Cuaderno con un taller
+  para acercar la programación funcional a programadores con o sin
+  experiencia en la misma. Se tratan los elementos fundamentales de la
+  programación funcional: inmutabilidad, recursividad, pattern
   matching y funciones de orden superior.
+- 🇪🇸 **¿Pero qué demonios es un GenServer?**
+  ([demonios_de_genserver.livemd](demonios_de_genserver.livemd)):
+  Cuaderno con una presentación realizada conjuntamente en las
+  comunidades de [Madrid
+  Elixir](https://www.meetup.com/madrid-elixir/) y
+  [Madrid.rb](https://www.madridrb.com/) en el que se desmitifica lo
+  que realmente es un
+  [GenServer](https://hexdocs.pm/elixir/GenServer.html).
