@@ -8,7 +8,7 @@
 docker run -p 8080:8080 -p 8081:8081 --pull always -u $(id -u):$(id -g) -v $(pwd):/data ghcr.io/livebook-dev/livebook:0.14.5
 ```
 
-* Entonces abre en un navegador la URL indicada por el servidor.
+* Entonces abre en un navegador la URL indicada en el arranque del contenedor.
 * Una vez en Livebook, puedes abrir este cuaderno directamente, el fichero `pf_en_elixir.livemd`.
 * Si no quieres clonar el repo, puedes abrir el cuaderno directamente "desde una URL", por ejemplo copiando [esta misma URL](https://github.com/aherranz/public_notebooks/blob/main/demonios_de_genserver.livemd).
 
