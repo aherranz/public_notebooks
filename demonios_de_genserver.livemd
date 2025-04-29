@@ -1,12 +1,16 @@
 # ¿Pero qué demonios es un GenServer?
 
-```elixir
-Mix.install([
-  {:kino, "~> 0.0"}
-])
+## Puesta en marcha de este Livebook
 
+* Quizás la forma más sencilla de hacer este cuaderno sea clonando este repositorio y poniendo en marcha Livebook dentro de un contenedor:
 
+```bash
+docker run -p 8080:8080 -p 8081:8081 --pull always -u $(id -u):$(id -g) -v $(pwd):/data ghcr.io/livebook-dev/livebook:0.14.5
 ```
+
+* Entonces abre en un navegador la URL indicada por el servidor.
+* Una vez en Livebook, puedes abrir este cuaderno directamente, el fichero `pf_en_elixir.livemd`.
+* Si no quieres clonar el repo, puedes abrir el cuaderno directamente "desde una URL", por ejemplo copiando [esta misma URL](https://github.com/aherranz/public_notebooks/blob/main/demonios_de_genserver.livemd).
 
 ## Procesos en Elixir: curso de choque
 
